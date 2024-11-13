@@ -34,17 +34,16 @@ def adjust_key(key, required_length, is_3des=False):
             return key + get_random_bytes(required_length - len(key))
         return key[:required_length]
 
-def pad_text(text, block_size=8):
-    """Aplica padding PKCS5 al texto para que sea múltiplo del tamaño de bloque"""
+def pad_text(text):
+    """Aplica padding al texto para que sea múltiplo del tamaño de bloque"""
+    block_size = 8  # DES block size
     padding_length = block_size - (len(text) % block_size)
     padding = bytes([padding_length]) * padding_length
     return text + padding
 
 def unpad_text(text):
-    """Remueve el padding PKCS5 del texto descifrado"""
+    """Remueve el padding del texto descifrado"""
     padding_length = text[-1]
-    if padding_length > len(text):
-        raise ValueError("Padding length is greater than text length")
     return text[:-padding_length]
 
 class CipherWrapper:
