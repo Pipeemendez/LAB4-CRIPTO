@@ -38,7 +38,7 @@ def unpad_text(text):
     """Remueve el padding PKCS5 del texto descifrado"""
     padding_length = text[-1]
     if padding_length > len(text):
-        raise ValueError("Padding length is greater than text length")
+        raise ValueError("El tamaño del padding es mas grande que el del texto.")
     return text[:-padding_length]
 
 class CipherWrapper:
